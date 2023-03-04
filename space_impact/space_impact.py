@@ -243,6 +243,9 @@ def run_game():
             asteroids_text_rect = asteroids_text.get_rect()
             asteroids_text_rect.center = (SCREEN_WIDTH/2, SCREEN_HEIGHT/1.75)
             DISPLAYSURF.blit(asteroids_text, asteroids_text_rect)
+            if asteroids_destroyed > ALL_TIME_TOP_SCORE:
+                save_top_score(asteroids_destroyed)
+                load_top_score()
             pygame.display.update()
             for entity in all_sprites:
                 entity.kill() 
@@ -283,6 +286,7 @@ def main_menu():
         DISPLAYSURF.blit(quit_text, (325, 315))
             
         # shows top score
+        ALL_TIME_TOP_SCORE = load_top_score()
         score_text = FONT.render("Top Score: " + str(ALL_TIME_TOP_SCORE), True, (255, 255, 255))
         DISPLAYSURF.blit(score_text, (250, 100))
             
